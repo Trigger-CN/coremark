@@ -90,7 +90,7 @@ typedef clock_t CORE_TICKS;
 #endif
 #ifndef COMPILER_FLAGS
 #define COMPILER_FLAGS \
-    FLAGS_STR /* "Please put compiler flags here (e.g. -o3)" */
+    "-O2 -Os" /* "Please put compiler flags here (e.g. -o3)" */
 #endif
 #ifndef MEM_LOCATION
 #define MEM_LOCATION                                                         \
@@ -130,7 +130,11 @@ typedef size_t         ee_size_t;
         SEED_VOLATILE - from volatile variables.
 */
 #ifndef SEED_METHOD
-#define SEED_METHOD SEED_ARG
+#define SEED_METHOD SEED_VOLATILE
+#endif
+
+#if (SEED_METHOD == SEED_VOLATILE)
+#define ITERATIONS (60000)
 #endif
 
 /* Configuration: MEM_METHOD
@@ -222,7 +226,7 @@ typedef size_t         ee_size_t;
         1 - argc/argv to main is not supported
 */
 #ifndef MAIN_HAS_NOARGC
-#define MAIN_HAS_NOARGC 0
+#define MAIN_HAS_NOARGC 1
 #endif
 
 /* Configuration: MAIN_HAS_NORETURN

@@ -65,6 +65,12 @@ typedef ee_u32 secs_ret;
 #define MAIN_RETURN_TYPE int
 #endif
 
+#if MAIN_HAS_NOARGC
+MAIN_RETURN_TYPE coremark_main(void);
+#else
+MAIN_RETURN_TYPE coremark_main(int argc, char *argv[]);
+#endif
+
 void       start_time(void);
 void       stop_time(void);
 CORE_TICKS get_time(void);
